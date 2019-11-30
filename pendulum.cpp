@@ -43,14 +43,19 @@ int main(int argc, char** argv)
 {
   Pendulum p;
   double t=0.0;//Time 
+  double to=0.0;
   int N = atoi(argv[1]);//steps of evolution
   // intialization
   initial_conditions(p);
   for (int ii=1; ii<=N; ii++)
     {
       euler_cromer(p,dt,t);
-      std::cout << t << "\t" << p.Theta << "\t" << p.W  << std::endl;
       t+=dt;
+      to+=dt;
+      if(to > 3*M_PI){
+         to=0.0;
+      std::cout << t << "\t" << p.Theta << "\t" << p.W  << std::endl;
+      }
     }
   return 0;
 }
